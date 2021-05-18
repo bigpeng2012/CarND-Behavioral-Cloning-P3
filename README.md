@@ -1,5 +1,7 @@
 # Behavioral Cloning Project
 
+Video Link: https://youtu.be/cmfyUuDgtV0
+
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 Overview
@@ -51,11 +53,63 @@ The following resources can be found in this github repository:
 
 The simulator can be downloaded from the classroom. In the classroom, we have also provided sample data that you can optionally use to help train your model.
 
-## Details About Files In This Directory
+### Simulator
+The project requires also the [Udacity Simulator](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip):
+```
+$ cd <prg-folder>/simulator
+$ wget https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip
+$ unzip linux-sim.zip
+$ cd linux-sim
+$ chmod +x linux_sim.x86_64
+```
 
+### Udacity dataset
+This [dataset](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip) has been provided by Udacity as project resource and it has been used to train and validate the CNN model. It contains 8036 rows composed by:
+- left image (jpeg 320*160)
+- center image (jpeg 320*160)
+- right image (jpeg 320*160)
+- steering angle 
+
+A positive steering angle corresponds to right turns, a negative one to left turns and a zero one to the car going straight.
+
+
+```
+$ cd <prj-folder>/udacity_data
+$ wget https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
+$ unzip data.zip
+```
+
+
+Now let's traing the model!
+
+## Train the model with Udacity provided docker image(CPU)  
 ```sh
 sudo docker run -it --rm -v `pwd`:/src udacity/carnd-term1-starter-kit python3 model.py
 ```
+
+## Train with GPU
+Failed to build the docker container based on Udacity's Dockerfile.gpu, so found this container on [docker hub](https://hub.docker.com/r/istepanov/carnd-gpu)
+
+```sh
+sudo docker pull istepanov/carnd-gpu
+```
+
+```sh
+nvidia docker run -it --rm -v `pwd`:/src istepanov/carnd-gpu python3 model.py
+```
+
+
+Now let's test on the simulator!
+
+## Start the simulator:
+```
+$ cd <prj-folder>/simulator/linux-sim
+$ export LC_ALL="en_US.UTF-8"
+$ ./linux_sim.x86_64 linux_sim_Data/
+```
+Then the user should select the **autonomous mode** option.
+<br><br>
+
 
 ### `drive.py`
 
@@ -69,6 +123,14 @@ Once the model has been saved, it can be used with drive.py using this command:
 ```sh
 python drive.py model.h5
 ```
+
+### run with Docker
+Start the Docker container and run the *drive.py* script:
+ 
+```
+sudo docker run -it --rm -v `pwd`:/src -p 4567:4567 udacity/carnd-term1-starter-kit python drive.py model.h5
+```
+
 
 The above command will load the trained model and use the model to make predictions on individual images in real-time and send the predicted angle back to the server via a websocket connection.
 
@@ -124,6 +186,6 @@ Will run the video at 48 FPS. The default FPS is 60.
 ### Tips
 - Please keep in mind that training images are loaded in BGR colorspace using cv2 while drive.py load images in RGB to predict the steering angles.
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+
+
 
