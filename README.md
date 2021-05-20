@@ -58,7 +58,7 @@ The simulator can be downloaded from the classroom. In the classroom, we have al
 ### Simulator
 The project requires also the [Udacity Simulator](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip):
 ```
-$ cd <prg-folder>/simulator
+$ cd <prj-folder>
 $ wget https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip
 $ unzip linux-sim.zip
 $ cd linux-sim
@@ -76,7 +76,7 @@ A positive steering angle corresponds to right turns, a negative one to left tur
 
 
 ```
-$ cd <prj-folder>/udacity_data
+$ cd <prj-folder>
 $ wget https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip
 $ unzip data.zip
 ```
@@ -86,7 +86,7 @@ Now let's traing the model!
 
 ## Train the model with Udacity provided docker image(CPU)  
 ```sh
-sudo docker run -it --rm -v `pwd`:/src udacity/carnd-term1-starter-kit python3 model.py
+sudo docker run -it --rm -v `pwd`:/src udacity/carnd-term1-starter-kit python model.py
 ```
 
 ## Train with GPU
@@ -100,12 +100,12 @@ sudo docker pull istepanov/carnd-gpu
 nvidia docker run -it --rm -v `pwd`:/src istepanov/carnd-gpu python3 model.py
 ```
 
-
-Now let's test on the simulator!
+This will create *model.h5* file which saves the trained model.
+Now let's test the model on the simulator!
 
 ## Start the simulator:
 ```
-$ cd <prj-folder>/simulator/linux-sim
+$ cd <prj-folder>/linux-sim
 $ export LC_ALL="en_US.UTF-8"
 $ ./linux_sim.x86_64 linux_sim_Data/
 ```
