@@ -97,7 +97,7 @@ sudo docker pull istepanov/carnd-gpu
 ```
 
 ```sh
-nvidia docker run -it --rm -v `pwd`:/src istepanov/carnd-gpu python3 model.py
+nvidia-docker run -it --rm -v `pwd`:/src istepanov/carnd-gpu python3 model.py
 ```
 
 This will create *model.h5* file which saves the trained model.
